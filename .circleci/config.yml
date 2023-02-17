@@ -1,0 +1,61 @@
+version: 2.1
+
+workflows:
+  test:
+    jobs:
+      - rake_spec:
+          name: test_ruby-<< matrix.ruby_version >>
+          matrix:
+            parameters:
+              ruby_version:
+                - '3.2.1'
+                - '3.1.2'
+                - '3.0.5'
+                - '2.7.6'
+                - '2.6.9'
+                - '2.5.9'
+
+executors:
+  ruby:
+    parameters:
+      ruby_version:
+        type: string
+    docker:
+      - image: cimg/ruby:<< parameters.ruby_version >>
+
+commands:
+  update_rubygems:
+    steps:
+      - run:
+          name: Update RubyGems
+          command: sudo gem update --system 3.4.7 -N
+  bundle_install:
+    steps:
+      - run:
+          name: Bundle Install
+          command: bundle install
+  rake_spec:
+    steps:
+      - run:
+          name: Run Tests
+          command: bundle exec rake spec
+
+jobs:
+  rake_spec:
+    parameters:
+      ruby_version:
+        description: Ruby version
+        type: string
+      after-checkout-steps:
+        description: Steps that will be executed after checkout
+        type: steps
+        default: []
+    executor:
+      name: ruby
+      ruby_version: << parameters.ruby_version >>
+    steps:
+      - checkout
+      - steps: << parameters.after-checkout-steps >>
+      - update_rubygems
+      - bundle_install
+      - rake_spec
