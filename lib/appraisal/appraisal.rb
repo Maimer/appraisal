@@ -154,14 +154,7 @@ module Appraisal
       full_options = DEFAULT_INSTALL_OPTIONS.dup.merge(options)
       options_strings = []
       jobs = full_options.delete("jobs")
-      if jobs > 1
-        if Utils.support_parallel_installation?
-          options_strings << "--jobs=#{jobs}"
-        else
-          warn 'Your current version of Bundler does not support parallel installation. Please ' +
-            'upgrade Bundler to version >= 1.4.0, or invoke `appraisal` without `--jobs` option.'
-        end
-      end
+      options_strings << "--jobs=#{jobs}" if jobs > 1
 
       path = full_options.delete("path")
       if path

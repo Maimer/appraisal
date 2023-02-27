@@ -96,18 +96,6 @@ describe Appraisal::Appraisal do
       allow(Appraisal::Command).to receive(:new).and_return(double(:run => true))
     end
 
-    it 'runs single install command on Bundler < 1.4.0' do
-      stub_const('Bundler::VERSION', '1.3.0')
-
-      warning = capture(:stderr) do
-        @appraisal.install("jobs" => 42)
-      end
-
-      expect(Appraisal::Command).to have_received(:new).
-        with("#{bundle_check_command} || #{bundle_single_install_command}")
-      expect(warning).to include 'Please upgrade Bundler'
-    end
-
     it 'runs parallel install command on Bundler >= 1.4.0' do
       stub_const('Bundler::VERSION', '1.4.0')
 

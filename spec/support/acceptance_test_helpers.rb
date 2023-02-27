@@ -15,12 +15,6 @@ module AcceptanceTestHelpers
   included do
     metadata[:type] = :acceptance
 
-    before :parallel => true do
-      unless Appraisal::Utils.support_parallel_installation?
-        pending 'This Bundler version does not support --jobs flag.'
-      end
-    end
-
     before do
       cleanup_artifacts
       save_environment_variables
