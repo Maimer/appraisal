@@ -43,7 +43,7 @@ module DependencyHelpers
       `git config user.email "appraisal@thoughtbot.com"`
       `git config user.name "Appraisal"`
       `git add .`
-      `git commit -a -m "initial commit"`
+      `git -c commit.gpgsign=false commit -a -m "initial commit"`
     end
 
     # Cleanup Bundler cache path manually for now
