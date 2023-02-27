@@ -18,8 +18,8 @@ describe 'Gemspec' do
     Gemfile
 
     run 'bundle install --local'
-    run 'appraisal install'
-    output = run 'appraisal rake version'
+    run 'bundle exec appraisal install'
+    output = run 'bundle exec appraisal rake version'
 
     expect(output).to include 'Loaded 1.1.0'
   end
@@ -36,8 +36,8 @@ describe 'Gemspec' do
     Gemfile
 
     run 'bundle install --local'
-    run 'appraisal install'
-    output = run 'appraisal rake version'
+    run 'bundle exec appraisal install'
+    output = run 'bundle exec appraisal rake version'
 
     expect(output).to include 'Loaded 1.1.0'
   end

@@ -8,7 +8,7 @@ describe 'CLI appraisal (with no arguments)' do
       end
     Appraisal
 
-    run 'appraisal'
+    run 'bundle exec appraisal'
 
     expect(file 'gemfiles/1.0.0.gemfile').to be_exists
     expect(file 'gemfiles/1.0.0.gemfile.lock').to be_exists

@@ -8,10 +8,10 @@ describe 'CLI', 'appraisal clean' do
       end
     Appraisal
 
-    run 'appraisal install'
+    run 'bundle exec appraisal install'
     write_file 'gemfiles/non_related_file', ''
 
-    run 'appraisal clean'
+    run 'bundle exec appraisal clean'
 
     expect(file 'gemfiles/1.0.0.gemfile').not_to be_exists
     expect(file 'gemfiles/1.0.0.gemfile.lock').not_to be_exists

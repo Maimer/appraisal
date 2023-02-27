@@ -18,7 +18,7 @@ describe 'CLI', 'appraisal generate' do
       end
     Appraisal
 
-    run 'appraisal generate'
+    run 'bundle exec appraisal generate'
 
     expect(file 'gemfiles/1.0.0.gemfile').to be_exists
     expect(file 'gemfiles/1.1.0.gemfile').to be_exists

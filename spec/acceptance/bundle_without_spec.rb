@@ -36,7 +36,7 @@ describe "Bundler without flag" do
     Appraisals
 
     run "bundle install --local"
-    output = run "appraisal install --without drinks"
+    output = run "bundle exec appraisal install --without drinks"
 
     expect(output).to include("Bundle complete")
     expect(output).to(
@@ -46,7 +46,7 @@ describe "Bundler without flag" do
     expect(output).not_to include("coffee")
     expect(output).not_to include("soda")
 
-    output = run "appraisal install"
+    output = run "bundle exec appraisal install"
 
     expect(output).to include("The Gemfile's dependencies are satisfied")
   end

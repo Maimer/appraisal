@@ -3,7 +3,7 @@ require "spec_helper"
 describe "CLI", "appraisal version" do
   context "with version subcommand" do
     it "prints out version string" do
-      output = run "appraisal version"
+      output = run "bundle exec appraisal version"
 
       expect(output).to include("Appraisal #{Appraisal::VERSION}")
     end
@@ -11,7 +11,7 @@ describe "CLI", "appraisal version" do
 
   context "with -v flag" do
     it "prints out version string" do
-      output = run "appraisal -v"
+      output = run "bundle exec appraisal -v"
 
       expect(output).to include("Appraisal #{Appraisal::VERSION}")
     end
@@ -19,7 +19,7 @@ describe "CLI", "appraisal version" do
 
   context "with --version flag" do
     it "prints out version string" do
-      output = run "appraisal --version"
+      output = run "bundle exec appraisal --version"
 
       expect(output).to include("Appraisal #{Appraisal::VERSION}")
     end

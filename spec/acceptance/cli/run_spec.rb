@@ -12,7 +12,7 @@ describe 'CLI appraisal (with arguments)' do
       end
     Appraisal
 
-    run 'appraisal install'
+    run 'bundle exec appraisal install'
     write_file 'test.rb', 'puts "Running: #{$dummy_version}"'
     write_file 'test with spaces.rb', 'puts "Running: #{$dummy_version}"'
   end
@@ -24,13 +24,13 @@ describe 'CLI appraisal (with arguments)' do
       end
     TEST_FILE
 
-    output = run 'appraisal 1.0.0 ruby -rbundler/setup -rdummy test.rb'
+    output = run 'bundle exec appraisal 1.0.0 ruby -rbundler/setup -rdummy test.rb'
     expect(output).to include 'Appraisal initialized!'
   end
 
   context 'with appraisal name' do
     it 'runs the given command against a correct versions of dependency' do
-      output = run 'appraisal 1.0.0 ruby -rbundler/setup -rdummy test.rb'
+      output = run 'bundle exec appraisal 1.0.0 ruby -rbundler/setup -rdummy test.rb'
 
       expect(output).to include 'Running: 1.0.0'
       expect(output).not_to include 'Running: 1.1.0'
@@ -39,7 +39,7 @@ describe 'CLI appraisal (with arguments)' do
 
   context 'without appraisal name' do
     it 'runs the given command against all versions of dependency' do
-      output = run 'appraisal ruby -rbundler/setup -rdummy test.rb'
+      output = run 'bundle exec appraisal ruby -rbundler/setup -rdummy test.rb'
 
       expect(output).to include 'Running: 1.0.0'
       expect(output).to include 'Running: 1.1.0'
@@ -48,7 +48,7 @@ describe 'CLI appraisal (with arguments)' do
 
   context 'when one of the arguments contains spaces' do
     it 'preserves those spaces' do
-      command = 'appraisal 1.0.0 ruby -rbundler/setup -rdummy "test with spaces.rb"'
+      command = 'bundle exec appraisal 1.0.0 ruby -rbundler/setup -rdummy "test with spaces.rb"'
       output = run(command)
       expect(output).to include 'Running: 1.0.0'
     end

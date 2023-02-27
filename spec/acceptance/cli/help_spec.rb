@@ -8,7 +8,7 @@ describe 'CLI', 'appraisal help' do
       end
     Appraisal
 
-    output = run 'appraisal help'
+    output = run 'bundle exec appraisal help'
 
     expect(output).to include 'Usage:'
     expect(output).to include 'appraisal [APPRAISAL_NAME] EXTERNAL_COMMAND'
@@ -16,7 +16,7 @@ describe 'CLI', 'appraisal help' do
   end
 
   it 'prints out usage even Appraisals file does not exist' do
-    output = run 'appraisal help'
+    output = run 'bundle exec appraisal help'
 
     expect(output).to include 'Usage:'
     expect(output).not_to include 'Unable to locate'
