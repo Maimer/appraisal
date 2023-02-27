@@ -122,9 +122,9 @@ module AcceptanceTestHelpers
         Reinstall Bundler to #{TMP_GEM_ROOT} as `BUNDLE_DISABLE_SHARED_GEMS`
         is enabled.
       WARNING
-      version = Utils.bundler_version
+      version = ENV['BUNDLER_VERSION']
 
-      run "gem install bundler --version #{version} --install-dir '#{TMP_GEM_ROOT}'"
+      run "gem install bundler --version '#{version}' --install-dir '#{TMP_GEM_ROOT}'"
     end
   end
 
@@ -135,7 +135,7 @@ module AcceptanceTestHelpers
       gem 'appraisal', :path => '#{PROJECT_ROOT}'
     Gemfile
 
-    run "bundle install --local"
+    run "bundle install"
     run "bundle binstubs --all"
   end
 

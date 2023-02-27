@@ -2,10 +2,12 @@ require 'rubygems'
 require 'bundler/setup'
 require "./spec/support/acceptance_test_helpers"
 require "./spec/support/stream_helpers"
+require 'pry'
 
 PROJECT_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..')).freeze
 TMP_GEM_ROOT = File.join(PROJECT_ROOT, "tmp", "gems")
 ENV["APPRAISAL_UNDER_TEST"] = "1"
+ENV['BUNDLER_VERSION'] ||= Appraisal::Utils.bundler_version
 
 RSpec.configure do |config|
   config.raise_errors_for_deprecations!
