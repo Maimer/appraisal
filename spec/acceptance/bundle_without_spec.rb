@@ -8,7 +8,7 @@ describe "Bundler without flag" do
       source "https://rubygems.org"
 
       gem "pancake"
-      gem "rake", "~> 10.5", :platform => :ruby_18
+      gem "rake", "~> 10.5", :platform => :ruby_25
 
       group :drinks do
         gem "orange_juice"
