@@ -4,7 +4,16 @@ describe "Bundle with custom path" do
   let(:gem_name) { 'rack' }
   let(:path) { 'vendor/bundle' }
 
-  shared_examples :gemfile_dependencies_are_satisfied do
+  context 'when already installed in vendor/another' do
+    before do
+      build_gemfile <<-Gemfile
+        source "https://rubygems.org"
+
+        gem '#{gem_name}'
+      Gemfile
+
+      run 'bundle install --path vendor/another'
+    end
 
     it 'installs gems in the --path directory' do
       build_gemfile <<-Gemfile
@@ -33,21 +42,5 @@ describe "Bundle with custom path" do
       appraisal_output = run 'bundle exec appraisal install'
       expect(appraisal_output).to include("The Gemfile's dependencies are satisfied")
     end
-  end
-
-  include_examples :gemfile_dependencies_are_satisfied
-
-  context 'when already installed in vendor/another' do
-    before do
-      build_gemfile <<-Gemfile
-        source "https://rubygems.org"
-
-        gem '#{gem_name}'
-      Gemfile
-
-      run 'bundle install --path vendor/another'
-    end
-
-    include_examples :gemfile_dependencies_are_satisfied
   end
 end
